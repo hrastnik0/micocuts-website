@@ -198,8 +198,8 @@
       background: var(--black);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 5rem;
     }
+    .scissors-inner svg { width: 72px; height: 72px; }
     .hero-stat-row {
       display: flex; gap: 2.5rem;
       position: relative; z-index: 1;
@@ -382,14 +382,15 @@
       width: 44px; height: 44px;
       border: 1px solid var(--border);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem;
       margin-bottom: 1.5rem;
       transition: border-color .25s, background .25s;
     }
+    .service-icon-wrap svg { width: 20px; height: 20px; stroke: var(--black); transition: stroke .25s; }
     .service-item:hover .service-icon-wrap {
       border-color: var(--black);
       background: var(--black);
     }
+    .service-item:hover .service-icon-wrap svg { stroke: var(--white); }
     .service-item h3 {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.3rem;
@@ -496,9 +497,9 @@
       background: var(--black);
       color: var(--white);
       display: flex; align-items: center; justify-content: center;
-      font-size: .95rem;
       flex-shrink: 0;
     }
+    .c-icon svg { width: 16px; height: 16px; stroke: var(--white); }
     .contact-details a { color: inherit; text-decoration: none; }
     .contact-details a:hover { text-decoration: underline; }
 
@@ -639,7 +640,14 @@
     <div class="hero-right">
       <div class="hero-visual">
         <div class="scissors-art">
-          <div class="scissors-inner">✂️</div>
+          <div class="scissors-inner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+            <line x1="20" y1="4" x2="8.12" y2="15.88"/>
+            <line x1="14.47" y1="14.48" x2="20" y2="20"/>
+            <line x1="8.12" y1="8.12" x2="12" y2="12"/>
+          </svg>
+        </div>
         </div>
       </div>
       <div class="hero-stat-row">
@@ -652,7 +660,7 @@
           <p>Client Rated</p>
         </div>
         <div class="hero-stat">
-          <h3>💈</h3>
+          <h3>MC</h3>
           <p>Stay Sharp</p>
         </div>
       </div>
@@ -708,25 +716,47 @@
     <div class="services-grid">
       <div class="service-item">
         <div class="service-num">01</div>
-        <div class="service-icon-wrap">✂️</div>
+        <div class="service-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+            <line x1="20" y1="4" x2="8.12" y2="15.88"/>
+            <line x1="14.47" y1="14.48" x2="20" y2="20"/>
+            <line x1="8.12" y1="8.12" x2="12" y2="12"/>
+          </svg>
+        </div>
         <h3>Precision Fades &amp; Tapers</h3>
         <p>Sharp, clean transitions tailored to your head shape. Every fade is surgical.</p>
       </div>
       <div class="service-item">
         <div class="service-num">02</div>
-        <div class="service-icon-wrap">🪒</div>
+        <div class="service-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3l18 18M3 21L21 3"/>
+            <rect x="9" y="9" width="6" height="6" rx="1"/>
+          </svg>
+        </div>
         <h3>Beard Sculpting</h3>
         <p>Expert grooming and lining to keep your facial hair looking its absolute best.</p>
       </div>
       <div class="service-item">
         <div class="service-num">03</div>
-        <div class="service-icon-wrap">💈</div>
+        <div class="service-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v20M8 6c0 0 4-2 8 0M8 10c0 0 4-2 8 0M8 14c0 0 4-2 8 0M8 18c0 0 4-2 8 0"/>
+          </svg>
+        </div>
         <h3>Classic Grooming</h3>
         <p>Old-school barbering techniques fused with contemporary styles. Timeless.</p>
       </div>
       <div class="service-item">
         <div class="service-num">04</div>
-        <div class="service-icon-wrap">🛋️</div>
+        <div class="service-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 9V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2"/>
+            <path d="M2 11a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4H2v-4z"/>
+            <path d="M4 15v3M20 15v3M7 18h10"/>
+          </svg>
+        </div>
         <h3>The Vibe</h3>
         <p>Relaxed, premium atmosphere. Kick back while we handle every detail.</p>
       </div>
@@ -764,15 +794,29 @@
       </div>
       <ul class="contact-details">
         <li>
-          <span class="c-icon">📍</span>
+          <span class="c-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+              <circle cx="12" cy="9" r="2.5"/>
+            </svg>
+          </span>
           Prebold 34, Prebold
         </li>
         <li>
-          <span class="c-icon">📞</span>
+          <span class="c-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.59 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.71 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l.97-.97a2 2 0 0 1 2.11-.45c.91.35 1.85.58 2.81.71A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </span>
           <a href="tel:030355493">030 355 493</a>
         </li>
         <li>
-          <span class="c-icon">⏰</span>
+          <span class="c-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </span>
           Mon – Sat &nbsp;·&nbsp; 8:00 – 19:00
         </li>
       </ul>
@@ -807,7 +851,7 @@
   <footer>
     <span class="f-logo">Mičo Cuts</span>
     <p class="f-copy">&copy; 2026 Mičo Cuts · Prebold · All rights reserved.</p>
-    <span class="f-tag">Stay Sharp 💈</span>
+    <span class="f-tag">Stay Sharp</span>
   </footer>
 
   <script>
