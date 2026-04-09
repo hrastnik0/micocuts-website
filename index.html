@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mičo Cuts — Stay Sharp</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0d1b2a;
+      --navy2:  #132235;
+      --gold:   #c9a84c;
+      --gold-l: #e2c97e;
+      --white:  #f8f8f6;
+      --grey:   #8a9ab0;
+      --line:   rgba(201,168,76,.25);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 6%;
+      background: rgba(13,27,42,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      color: var(--gold);
+      letter-spacing: .04em;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: .85rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      opacity: .75;
+      transition: opacity .25s, color .25s;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 8rem 6% 4rem;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 30%, rgba(201,168,76,.07) 0%, transparent 70%),
+        linear-gradient(180deg, #0d1b2a 0%, #132235 100%);
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block;
+      font-size: .75rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--line);
+      padding: .4rem 1.2rem;
+      border-radius: 2rem;
+      margin-bottom: 1.8rem;
+    }
+    #hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -.01em;
+      margin-bottom: 1.2rem;
+    }
+    #hero h1 span { color: var(--gold); }
+    #hero p.tagline {
+      font-size: 1.05rem;
+      color: var(--grey);
+      max-width: 480px;
+      margin: 0 auto 2.8rem;
+    }
+    .btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      padding: .85rem 2.2rem;
+      border-radius: 3px;
+      font-size: .85rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all .25s;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      border: 2px solid var(--gold);
+    }
+    .btn-primary:hover { background: var(--gold-l); border-color: var(--gold-l); }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,.3);
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    .scroll-hint {
+      position: absolute; bottom: 2.5rem;
+      font-size: .72rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--grey); display: flex; flex-direction: column; align-items: center; gap: .5rem;
+    }
+    .scroll-hint::after {
+      content: '';
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--grey), transparent);
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 7rem 6%; }
+
+    .section-label {
+      font-size: .72rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    h2.section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+    .divider {
+      width: 48px; height: 2px;
+      background: var(--gold);
+      margin: 1.5rem 0;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      background: var(--navy2);
+    }
+    .about-text p {
+      color: var(--grey);
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .about-visual {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .barber-pole {
+      width: 90px; height: 260px;
+      border-radius: 45px;
+      background: linear-gradient(
+        135deg,
+        #fff 0%, #fff 20%,
+        #c9a84c 20%, #c9a84c 40%,
+        #0d1b2a 40%, #0d1b2a 60%,
+        #fff 60%, #fff 80%,
+        #c9a84c 80%, #c9a84c 100%
+      );
+      background-size: 100% 80px;
+      box-shadow: 0 0 60px rgba(201,168,76,.2), inset 0 0 20px rgba(0,0,0,.3);
+      animation: spin-bg 4s linear infinite;
+      border: 3px solid rgba(255,255,255,.1);
+    }
+    @keyframes spin-bg {
+      0%   { background-position: 0 0; }
+      100% { background-position: 0 80px; }
+    }
+    .pole-cap {
+      position: absolute;
+      width: 96px; height: 24px;
+      background: linear-gradient(135deg, #ddd, #aaa);
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0,0,0,.5);
+    }
+    .pole-cap.top  { top: calc(50% - 143px); }
+    .pole-cap.bot  { top: calc(50% + 119px); }
+    .glow-ring {
+      position: absolute;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,.12), transparent 70%);
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--navy); }
+    .services-header { text-align: center; margin-bottom: 3.5rem; }
+    .services-header .divider { margin: 1.5rem auto; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--navy2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 2.2rem 1.8rem;
+      transition: border-color .3s, transform .3s;
+    }
+    .service-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .service-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--white);
+      margin-bottom: .7rem;
+    }
+    .service-card p { color: var(--grey); font-size: .92rem; }
+
+    /* ── WHY ── */
+    #why {
+      background: linear-gradient(135deg, var(--navy2) 0%, #0a1520 100%);
+      text-align: center;
+    }
+    #why .divider { margin: 1.5rem auto; }
+    #why > p {
+      color: var(--grey);
+      max-width: 620px;
+      margin: 0 auto 3.5rem;
+      font-size: 1rem;
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .why-item { padding: 1.5rem 1rem; }
+    .why-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: .4;
+      line-height: 1;
+      margin-bottom: .5rem;
+    }
+    .why-item h4 { font-size: 1rem; font-weight: 600; margin-bottom: .5rem; }
+    .why-item p  { color: var(--grey); font-size: .88rem; }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--navy);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .contact-info .divider { margin: 1.5rem 0; }
+    .contact-info p { color: var(--grey); font-size: 1rem; margin-bottom: 2rem; }
+    .contact-details { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .contact-details li {
+      display: flex; align-items: center; gap: 1rem;
+      color: var(--white);
+      font-size: .95rem;
+    }
+    .contact-details .icon {
+      width: 40px; height: 40px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-form input,
+    .contact-form textarea {
+      background: var(--navy2);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: .9rem 1.2rem;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: .9rem;
+      outline: none;
+      transition: border-color .25s;
+    }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { color: var(--grey); }
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--gold); }
+    .contact-form textarea { min-height: 130px; resize: vertical; }
+    .contact-form .btn-primary { align-self: flex-start; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080f18;
+      padding: 2rem 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--line);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    footer .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+    }
+    footer p { color: var(--grey); font-size: .8rem; }
+    .tagline-footer {
+      font-size: .75rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 5%; }
+      .nav-links { display: none; }
+      #about, #contact { grid-template-columns: 1fr; gap: 3rem; }
+      .about-visual { display: none; }
+      section { padding: 5rem 5%; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">Mičo Cuts</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-badge">💈 Premier Barbershop · Prebold</div>
+    <h1>Mičo<br><span>Cuts</span></h1>
+    <p class="tagline">Where Tradition Meets Precision. We don't just cut hair — we craft confidence.</p>
+    <div class="btn-group">
+      <a href="#contact" class="btn btn-primary">Book Appointment</a>
+      <a href="#services" class="btn btn-outline">Our Services</a>
+    </div>
+    <div class="scroll-hint">Scroll</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-text">
+      <p class="section-label">Our Story</p>
+      <h2 class="section-title">A Cut Above<br>the Rest</h2>
+      <div class="divider"></div>
+      <p>Step into Mičo Cuts, the neighborhood's premier destination for the modern gentleman. Whether you're looking for a surgical skin fade, a classic taper, or a relaxing hot towel shave, Mičo delivers excellence in every chair.</p>
+      <p>At Mičo Cuts, it's all about the details. We believe that a haircut is more than a chore — it's a ritual. Our shop combines a high-end aesthetic with a welcoming vibe, ensuring you leave looking sharp and feeling like a new man.</p>
+      <a href="#services" class="btn btn-primary" style="margin-top:.8rem;">Explore Services</a>
+    </div>
+    <div class="about-visual">
+      <div class="glow-ring"></div>
+      <div class="pole-cap top"></div>
+      <div class="barber-pole"></div>
+      <div class="pole-cap bot"></div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="services-header">
+      <p class="section-label">What We Offer</p>
+      <h2 class="section-title">Our Signature<br>Experience</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">✂️</div>
+        <h3>Precision Fades &amp; Tapers</h3>
+        <p>Sharp, clean transitions tailored to your head shape. Every fade is surgical, every taper is perfect.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🪒</div>
+        <h3>Beard Sculpting</h3>
+        <p>Expert grooming and lining to keep your facial hair looking its absolute best, every time.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💈</div>
+        <h3>Classic Grooming</h3>
+        <p>A blend of old-school barbering techniques with contemporary styles. Timeless results.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🛋️</div>
+        <h3>The Vibe</h3>
+        <p>A relaxed, premium atmosphere where you can kick back while we handle every detail.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section id="why">
+    <p class="section-label">Why Choose Us</p>
+    <h2 class="section-title">Mičo Cuts —<br>Stay Sharp.</h2>
+    <div class="divider"></div>
+    <p>We believe every gentleman deserves to leave the chair looking sharp and feeling confident. That's not a promise — it's our standard.</p>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-number">01</div>
+        <h4>Master Craftsmanship</h4>
+        <p>Years of precision barbering with a passion for perfection in every cut.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-number">02</div>
+        <h4>Premium Atmosphere</h4>
+        <p>High-end aesthetic meets welcoming vibe — feel at home from the moment you walk in.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-number">03</div>
+        <h4>It's a Ritual</h4>
+        <p>A haircut here isn't a chore. It's an experience you'll look forward to every time.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-info">
+      <p class="section-label">Find Us</p>
+      <h2 class="section-title">Book Your<br>Appointment</h2>
+      <div class="divider"></div>
+      <p>Drop by or give us a call. We're ready to make you look your best.</p>
+      <ul class="contact-details">
+        <li>
+          <span class="icon">📍</span>
+          <span>Prebold 34, Prebold</span>
+        </li>
+        <li>
+          <span class="icon">📞</span>
+          <span><a href="tel:030355493" style="color:inherit;text-decoration:none;">030 355 493</a></span>
+        </li>
+        <li>
+          <span class="icon">⏰</span>
+          <span>Mon – Sat: 8:00 – 19:00</span>
+        </li>
+      </ul>
+    </div>
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <input type="text"  placeholder="Your Name"         required />
+      <input type="tel"   placeholder="Your Phone Number" required />
+      <input type="text"  placeholder="Preferred Service (e.g. Fade, Beard)" />
+      <textarea           placeholder="Any additional notes or preferred time..."></textarea>
+      <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="logo">Mičo Cuts</span>
+    <p>&copy; 2026 Mičo Cuts. All rights reserved.</p>
+    <span class="tagline-footer">Stay Sharp 💈</span>
+  </footer>
+
+  <script>
+    // Smooth active nav highlight
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(a => {
+            a.style.opacity = a.getAttribute('href') === '#' + e.target.id ? '1' : '.75';
+            a.style.color   = a.getAttribute('href') === '#' + e.target.id ? 'var(--gold)' : '';
+          });
+        }
+      });
+    }, { threshold: .4 });
+    sections.forEach(s => observer.observe(s));
+
+    // Contact form feedback
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'Sent! We\'ll be in touch ✓';
+      btn.style.background = '#2a6b3f';
+      btn.style.borderColor = '#2a6b3f';
+      btn.disabled = true;
+    }
+  </script>
+
+</body>
+</html>
